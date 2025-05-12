@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class Login {
 	
 	@Test(priority=1)
-	public void verifyLoginWithValidCreds() throws InterruptedException {
+	public void verifyLoginWithValidCreds()  {
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
