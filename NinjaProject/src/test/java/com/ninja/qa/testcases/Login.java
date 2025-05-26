@@ -52,4 +52,27 @@ public class Login {
 		driver.quit();
 	}
 
+	@Test(priority = 3)
+	public void verifyLoginWithInvalidUsername() {
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+		driver.get("https://tutorialsninja.com/demo/");
+		driver.findElement(By.xpath("//span[text()='My Account']")).click();
+		driver.findElement(By.linkText("Login")).click();
+		driver.findElement(By.id("input-email")).sendKeys("gajan_rr@yahoo.ca");
+		driver.findElement(By.id("input-password")).sendKeys("test1234");
+		driver.findElement(By.xpath("//input[@value='Login']")).click();
+
+		String actualMsg = driver.findElement(By.xpath("//div[contains(@class,'alert-dismissible')]")).getText();
+		String expectedMsg = "Warning: No match for E-Mail Address and/or Password";
+		System.out.println(actualMsg);		
+		Assert.assertTrue(actualMsg.contains(expectedMsg), "Expected Warning message is not displayed");
+		driver.quit();
+
+	
+	}
+
 }
